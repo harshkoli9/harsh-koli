@@ -55,7 +55,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Hamburger Menu for Mobile */}
+        {/* Hamburger */}
         <div className="md:hidden">
           <button onClick={toggleMenu} aria-label="Toggle Menu">
             {isOpen ? <X className="text-white" /> : <Menu className="text-white" />}
@@ -70,17 +70,17 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="md:hidden bg-white bg-opacity-90 backdrop-blur-lg"
+            transition={{ duration: 0.4 }}
+            className="md:hidden absolute top-full left-0 w-full bg-black text-white z-40 shadow-lg"
           >
-            <ul className="flex flex-col space-y-4 py-4 px-6 text-black">
+            <ul className="flex flex-col gap-4 py-6 px-6 text-lg font-semibold">
               {navLinks.map((link, index) => (
                 <motion.li
                   key={index}
-                  className={`cursor-pointer transition ${
+                  className={`cursor-pointer ${
                     pathname === link.path ? "text-red-500" : "hover:text-red-500"
                   }`}
-                  whileHover={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.05 }}
                   onClick={toggleMenu}
                 >
                   <Link href={link.path}>{link.name}</Link>
