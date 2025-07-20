@@ -13,6 +13,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About Me", path: "/about" },
+    { name: "Achievements", path: "/achievements" }, // ✅ Added this
     { name: "Contact Me", path: "/contact" },
   ];
 
@@ -93,3 +94,4 @@ export default function Navbar() {
     </motion.nav>
   );
 }
+// This code defines a responsive navigation bar using React and Framer Motion.
