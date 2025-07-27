@@ -11,7 +11,7 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 
-const ContactCard = () => {
+const  ContactCard = () => {
   return (
     <div className="bg-gradient-to-b from-black to-gray-600 min-h-screen flex items-center justify-center py-10 px-4">
       <div className="bg-black rounded-3xl shadow-xl p-6 sm:p-10 max-w-6xl w-full flex flex-col md:flex-row items-center mt-16">
@@ -29,10 +29,10 @@ const ContactCard = () => {
             <div className="flex items-center">
               <FaEnvelope className="text-red-600 mr-3" />
               <Link
-                href="mailto:kunal.nimbre.30@gmail.com"
+                href="mailto:kunal.nimbre9436@gmail.com"
                 className="text-blue-600 hover:underline"
               >
-                kunal.nimbre.30@gmail.com
+                kunal.nimbre9436@gmail.com
               </Link>
             </div>
 
