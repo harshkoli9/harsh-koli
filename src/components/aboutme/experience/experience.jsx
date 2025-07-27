@@ -17,7 +17,7 @@ const experienceData = [
     role: "Project Designer",
     year: "2023 - 2024",
     description:
-      "Worked as a Project Designer at Thal RCF, under Prasanna Niumbre at Alibaug.",
+      "Worked as a Project Designer at Thal RCF, under Prasanna Nimbre at Alibaug.",
   },
   {
     id: 3,
