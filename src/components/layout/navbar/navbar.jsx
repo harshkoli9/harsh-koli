@@ -12,14 +12,14 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "About", path: "/about" },
-    { name: "Skills", path: "skills" },
+    { name: "Skills", path: "/skills" }, // ✅ FIXED
     { name: "Projects", path: "/projects" },
     { name: "Contact", path: "/contact" },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // auto close menu on route change
+  // auto close on route change
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
@@ -29,7 +29,7 @@ export default function Navbar() {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 w-full backdrop-blur-xl bg-white/10 border-b border-white/20 shadow-xl z-50"
+      className="fixed top-0 left-0 w-full backdrop-blur-xl bg-white/10 border-b border-white/20 shadow-xl z-50 relative"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
 
@@ -45,7 +45,7 @@ export default function Navbar() {
           </Link>
         </motion.div>
 
-        {/* DESKTOP */}
+        {/* DESKTOP MENU */}
         <ul className="hidden md:flex space-x-8 text-white font-semibold text-lg">
           {navLinks.map((link) => (
             <li key={link.path} className="relative">
@@ -70,14 +70,27 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* HAMBURGER */}
+        {/* HAMBURGER BUTTON */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-white z-50"
           onClick={toggleMenu}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
+
+      {/* OVERLAY */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/40 z-40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* MOBILE MENU */}
       <AnimatePresence>
@@ -87,7 +100,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-black/95 backdrop-blur-xl"
+            className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl z-50"
           >
             <ul className="flex flex-col items-center gap-6 py-8 text-xl font-semibold text-white">
               {navLinks.map((link) => (
