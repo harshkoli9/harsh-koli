@@ -79,7 +79,7 @@ const Hero = () => {
             </a>
 
             <a
-              href="projects"
+              href="/projects"
               className="px-6 py-3 border border-red-500 text-red-400 rounded-full hover:bg-red-600 hover:text-white transition text-sm sm:text-base"
             >
               Projects
