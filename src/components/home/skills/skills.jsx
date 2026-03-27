@@ -1,66 +1,119 @@
-import { useEffect, useState } from "react";
+"use client";
+
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Skills() {
-  const skills = [
-    { title: "SolidWorks", img: "solidworks.webp" },
-    { title: "Auto-Cad", img: "autocad.webp" },
-    { title: "ANSYS", img: "ansys.png" },
-    { title: "Mechanical tools handling", img: "mechtoolshandling.png" },
-    { title: "Excel", img: "xcel.webp" },
-    { title: "Word", img: "word.webp" },
-    { title: "Documentation", img: "documentation.webp" },
-    { title: "CATIA", img: "catia.webp" },
-    { title: "Matlab", img: "matlab.webp" },
-    { title: "SAP", img: "sap.webp" },
-    { title: "BOM", img: "bom.webp" },
-    { title: "Cricket", img: "cricket.webp" },
+
+  const categories = [
+    {
+      title: "Frontend",
+      skills: [
+        { name: "React", img: "/react.webp" },
+        { name: "JavaScript", img: "/javascript.webp" },
+        { name: "Tailwind", img: "/tailwind.webp" },
+        { name: "HTML", img: "/html.webp" },
+        { name: "CSS", img: "/css.webp" },
+      ],
+    },
+    {
+      title: "Tools",
+      skills: [
+        { name: "Git", img: "/git.webp" },
+        { name: "Postman", img: "/postman.webp" },
+        { name: "ChatGPT", img: "/chatgpt.webp" },
+        { name: "Gemini", img: "/gemini.webp" },
+        { name: "Claude", img: "/claude.webp" },
+        { name: "Excel", img: "/excel.webp" },
+      ],
+    },
+    {
+      title: "Data",
+      skills: [
+        { name: "SQL", img: "/sql.webp" },
+        { name: "Python", img: "/python.webp" },
+        { name: "Data Analysis", img: "/da.webp" },
+      ],
+    },
   ];
 
   return (
-    <div className="bg-gradient-to-b from-black to-gray-600 min-h-screen py-16 flex flex-col items-center">
+    <section className="bg-black py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+
+      {/* TITLE */}
       <motion.h2
-        className="text-5xl font-extrabold text-white mb-12 uppercase tracking-wide"
-        initial={{ opacity: 0, y: -50 }}
+        className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-white mb-12 md:mb-16"
+        initial={{ opacity: 0, y: -40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.8 }}
       >
-        My Skills
+        My <span className="text-red-500">Skills</span>
       </motion.h2>
 
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-6 md:px-8 w-full max-w-7xl"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
-        variants={{
-          hidden: { opacity: 0, y: 50 },
-          visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.2 } },
-        }}
-      >
-        {skills.map((skill, index) => (
-          <motion.div
-            key={index}
-            className="bg-gray-800 text-white p-6 sm:p-8 rounded-3xl shadow-2xl flex flex-col items-center 
-              transform transition-all duration-500 hover:scale-110 hover:-translate-y-2 hover:bg-white hover:text-black 
-              backdrop-blur-lg bg-opacity-90 border border-red-700"
-            variants={{
-              hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.5 }}
-          >
-            <motion.img
-              src={skill.img}
-              alt={skill.title}
-              className="w-20 h-20 sm:w-24 sm:h-24 object-contain mb-4 sm:mb-6"
-              whileHover={{ scale: 1.2, rotate: 10 }}
-            />
-            <h3 className="text-xl sm:text-2xl font-bold">{skill.title}</h3>
-          </motion.div>
+      <div className="max-w-7xl mx-auto space-y-10 md:space-y-14">
+
+        {categories.map((category, i) => (
+          <div key={i}>
+
+            {/* CATEGORY TITLE */}
+            <motion.h3
+              className="text-lg sm:text-xl md:text-2xl font-semibold text-red-400 mb-5"
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >  
+              {category.title}
+            </motion.h3>
+
+            {/* GRID */}
+            <div className="
+              grid 
+              grid-cols-2 
+              sm:grid-cols-3 
+              md:grid-cols-4 
+              lg:grid-cols-5 
+              xl:grid-cols-6
+              gap-4 sm:gap-5 md:gap-6
+            ">
+
+              {category.skills.map((skill, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ y: -6, scale: 1.05 }}
+                  className="
+                    bg-white/5 
+                    backdrop-blur-md 
+                    border border-white/10 
+                    rounded-xl 
+                    p-4 sm:p-5 
+                    flex flex-col items-center justify-center 
+                    text-white 
+                    transition duration-300 
+                    hover:shadow-[0_0_20px_rgba(255,0,0,0.35)]
+                  "
+                >
+                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-2 sm:mb-3">
+                    <Image
+                      src={skill.img}
+                      alt={skill.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+
+                  <p className="text-[11px] sm:text-xs md:text-sm font-medium text-center leading-tight">
+                    {skill.name}
+                  </p>
+                </motion.div>
+              ))}
+
+            </div>
+
+          </div>
         ))}
-      </motion.div>
-    </div>
+
+      </div>
+
+    </section>
   );
 }

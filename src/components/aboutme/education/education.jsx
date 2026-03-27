@@ -1,94 +1,112 @@
 "use client";
-import React from "react";
+
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const educationData = [
   {
-    id: 1,
+    degree: "B.Tech Electronics & Telecommunication",
     institution: "Pillai College of Engineering",
-    degree: "B.Tech in Mechanical Engineering",
-    year: "2021 to 2025",
-    description: "7.2 CGPI",
+    year: "2021 — 2025",
+    description: "CGPI: 7.2",
+    logo: "/pce.webp",
   },
   {
-    id: 2,
-    institution: "Mahatma Education Society",
     degree: "Higher Secondary Certificate",
-    year: "2019 to 2021",
-    description: "81%",
+    institution: "KPC Kharghar Junior College",
+    year: "2019 — 2021",
+    description: "86%",
+    logo: "/kpc.webp",
   },
   {
-    id: 3,
-    institution: "Mahatma Education Society",
     degree: "Secondary School Certificate",
-    year: "2006 to 2018",
-    description: "82%",
+    institution: "St. Joseph High School",
+    year: "2006 — 2018",
+    description: "70%",
+    logo: "/stjoseph.webp",
   },
 ];
 
-// container variant for stagger
-const containerVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { staggerChildren: 0.2, duration: 0.6 },
-  },
-};
-
-// each card animates in
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
-const Education = () => {
+export default function Education() {
   return (
-    <div className="py-16 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section title animation */}
-        <motion.h2
-          className="text-4xl font-bold text-center text-white mb-12"
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
-        >
-          🎓 Education
-        </motion.h2>
+    <section className="bg-gradient-to-b from-black via-black to-gray-900 py-28 px-6">
 
-        {/* Grid container with stagger */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-          variants={containerVariants}
-        >
-          {educationData.map((edu) => (
+      <motion.h2
+        className="text-4xl md:text-5xl font-extrabold text-center text-white mb-24"
+        initial={{ opacity: 0, y: -40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+      >
+        My <span className="text-red-500">Education</span>
+      </motion.h2>
+
+      <div className="relative max-w-5xl mx-auto">
+
+        {/* Timeline Line */}
+        <div className="absolute left-3 md:left-1/2 -translate-x-1/2 w-[2px] h-full bg-red-500/20"></div>
+
+        <div className="space-y-20">
+
+          {educationData.map((edu, index) => (
             <motion.div
-              key={edu.id}
-              variants={cardVariants}
-              className="group bg-red-600 rounded-2xl shadow-xl overflow-hidden p-6 transition-all duration-300 hover:bg-white hover:scale-105"
+              key={index}
+              initial={{ opacity: 0, y: 60, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="relative"
             >
-              <h3 className="text-2xl font-semibold text-white group-hover:text-black mb-2 transition-colors duration-300">
-                {edu.degree}
-              </h3>
-              <p className="text-white/80 group-hover:text-black transition-colors duration-300">
-                {edu.institution}
-              </p>
-              <p className="text-white/70 group-hover:text-black transition-colors duration-300">
-                {edu.year}
-              </p>
-              <p className="text-white mt-3 text-sm group-hover:text-black transition-colors duration-300">
-                {edu.description}
-              </p>
+
+              {/* Timeline Dot */}
+              <div className="absolute left-3 md:left-1/2 -translate-x-1/2 w-5 h-5 bg-red-500 rounded-full shadow-[0_0_15px_rgba(255,0,0,0.7)] animate-pulse"></div>
+
+              {/* Card */}
+              <motion.div
+                whileHover={{ y: -6, scale: 1.03 }}
+                className={`bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl max-w-xl mx-auto hover:shadow-[0_0_50px_rgba(255,0,0,0.35)] transition ${
+                  index === 0 ? "ring-2 ring-red-500/40" : ""
+                }`}
+              >
+
+                {/* Header */}
+                <div className="flex items-center gap-5 mb-4">
+
+                  <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-white/10 border border-white/10">
+                    <Image
+                      src={edu.logo}
+                      fill
+                      alt={edu.institution}
+                      className="object-contain p-2"
+                    />
+                  </div>
+
+                  <div>
+                    <h3 className="text-white text-lg font-semibold leading-snug">
+                      {edu.degree}
+                    </h3>
+
+                    <p className="text-red-400 text-sm">
+                      {edu.institution}
+                    </p>
+
+                    <span className="text-xs text-red-300 bg-red-500/10 px-2 py-1 rounded-full inline-block mt-1">
+                      {edu.year}
+                    </span>
+                  </div>
+
+                </div>
+
+                <p className="text-gray-300 text-sm mt-2">
+                  {edu.description}
+                </p>
+
+              </motion.div>
+
             </motion.div>
           ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-};
 
-export default Education;
+        </div>
+
+      </div>
+
+    </section>
+  );
+}

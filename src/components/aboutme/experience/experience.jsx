@@ -1,96 +1,160 @@
 "use client";
-import React from "react";
+
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const experienceData = [
   {
-    id: 1,
-    company: "RCF SRN",
-    role: "Project Manager",
-    year: "2024 - 2025",
-    description:
-      "Worked as a Project manager at RCF SRN, under Gajanan Nimbre at Chembur.",
+    role: "Operations Executive – Engagement & Success",
+    company: "SkillsConnect",
+    year: "July 2025 — Present",
+    logo: "/skillsconnect.svg",
+    points: [
+      "Managed end-to-end recruitment lifecycle.",
+      "Handled client coordination & requirement gathering.",
+      "Built real-time tracking system.",
+    ],
   },
   {
-    id: 2,
-    company: "Thal RCF",
-    role: "Project Designer",
-    year: "2023 - 2024",
-    description:
-      "Worked as a Project Designer at Thal RCF, under Sadananda Nimbre at Alibaug.",
+    role: "Frontend Web Developer",
+    company: "Nexcore Alliance",
+    year: "6 Months",
+    logo: "/nexcorealliance.jpeg",
+    points: [
+      "Built responsive UIs using React & Next.",
+      "Delivered international & national projects.",
+      "Mentored trainees & led communication.",
+    ],
   },
   {
-    id: 3,
-    company: "Bharat Bijlee Limited",
-    role: "Project Developer",
-    year: "2025 to Present",
-    description:
-      "Selected at Bharat Bijlee as a Project Developer from Campus Placement.",
+    role: "Graphic Designer",
+    company: "Marketiq Junction",
+    year: "3 Months",
+    logo: "/marketiqjunction.webp",
+    points: [
+      "Designed branding creatives using Figma & Canva.",
+      "Conducted SEO & design bootcamps.",
+    ],
+  },
+  {
+    role: "Technical Content Creator",
+    company: "ISRC",
+    year: "3 Months",
+    logo: "/isrc.png",
+    points: [
+      "Created 50+ robotics & electronics videos.",
+      "Mentored students in tech learning.",
+    ],
+  },
+  {
+    role: "Social Media Head",
+    company: "IEEE-PCE",
+    year: "3 Years",
+    logo: "/ieee.webp",
+    points: [
+      "Managed tech event promotions.",
+      "Collaborated across committees.",
+    ],
   },
 ];
 
-// reuse the same variants
-const containerVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { staggerChildren: 0.2, duration: 0.6 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
-const Experience = () => {
+export default function Experience() {
   return (
-    <div className="py-16 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Animated heading */}
-        <motion.h2
-          className="text-4xl font-bold text-center text-white mb-12"
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
-        >
-          🧠 Experience
-        </motion.h2>
+    <section className="bg-gradient-to-b from-black via-black to-gray-900 py-24 px-6">
 
-        {/* Animated grid */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-          variants={containerVariants}
-        >
-          {experienceData.map((exp) => (
+      {/* TITLE */}
+      <motion.h2
+        className="text-4xl md:text-5xl font-extrabold text-center text-white mb-20"
+        initial={{ opacity: 0, y: -40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        Professional <span className="text-red-500">Experience</span>
+      </motion.h2>
+
+      <div className="relative max-w-4xl mx-auto">
+
+        {/* Timeline Line */}
+        <div className="absolute left-3 md:left-1/2 -translate-x-1/2 w-[2px] h-full bg-red-500/30"></div>
+
+        <div className="space-y-16">
+
+          {experienceData.map((exp, index) => (
             <motion.div
-              key={exp.id}
-              variants={cardVariants}
-              className="group bg-red-600 rounded-2xl shadow-xl overflow-hidden p-6 transition-all duration-300 hover:bg-white hover:scale-105"
+              key={index}
+              initial={{
+                opacity: 0,
+                x: index % 2 === 0 ? -80 : 80,
+                scale: 0.96,
+              }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className={`relative flex flex-col md:flex-row items-start ${
+                index % 2 === 0 ? "md:flex-row-reverse" : ""
+              }`}
             >
-              <h3 className="text-2xl font-semibold text-white group-hover:text-black mb-2 transition-colors duration-300">
-                {exp.role}
-              </h3>
-              <p className="text-white/80 group-hover:text-black transition-colors duration-300">
-                {exp.company}
-              </p>
-              <p className="text-white/70 group-hover:text-black transition-colors duration-300">
-                {exp.year}
-              </p>
-              <p className="text-white mt-3 text-sm group-hover:text-black transition-colors duration-300">
-                {exp.description}
-              </p>
+
+              {/* Timeline Dot */}
+              <div className="absolute left-3 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-red-500 rounded-full shadow-[0_0_12px_rgba(255,0,0,0.7)] animate-pulse"></div>
+
+              {/* Card Wrapper */}
+              <div className="ml-8 md:ml-0 md:w-1/2">
+
+                <motion.div
+                  whileHover={{ scale: 1.04, y: -6 }}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:shadow-[0_0_40px_rgba(255,0,0,0.35)] transition"
+                >
+
+                  {/* HEADER */}
+                  <div className="flex items-start gap-4 mb-4">
+
+                    {/* LOGO */}
+                    <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-white/5 border border-white/10 flex-shrink-0">
+                      <Image
+                        src={exp.logo}
+                        fill
+                        alt={exp.company}
+                        className="object-contain p-2"
+                      />
+                    </div>
+
+                    {/* TEXT */}
+                    <div>
+
+                      <h3 className="text-white font-semibold text-lg leading-snug">
+                        {exp.role}
+                      </h3>
+
+                      <p className="text-red-400 text-sm">
+                        {exp.company}
+                      </p>
+
+                      <span className="text-xs text-red-300 bg-red-500/10 px-2 py-1 rounded-full inline-block mt-1">
+                        {exp.year}
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                  {/* POINTS */}
+                  <ul className="text-gray-300 text-sm space-y-2 list-disc pl-5">
+                    {exp.points.map((p, i) => (
+                      <li key={i}>{p}</li>
+                    ))}
+                  </ul>
+
+                </motion.div>
+
+              </div>
+
             </motion.div>
           ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-};
 
-export default Experience;
+        </div>
+
+      </div>
+
+    </section>
+  );
+}

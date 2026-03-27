@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -11,81 +11,98 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About Me", path: "/about" },
-    { name: "Achievements", path: "/achievements" }, // ✅ Added this
-    { name: "Contact Me", path: "/contact" },
+    { name: "About", path: "/about" },
+    { name: "Skills", path: "/" },
+    { name: "Projects", path: "/projects" },
+    { name: "Contact", path: "/contact" },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  // auto close menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
     <motion.nav
-      initial={{ y: -50, opacity: 0 }}
+      initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7 }}
-      className="fixed top-0 left-0 w-full backdrop-blur-lg bg-white bg-opacity-10 shadow-lg z-50"
+      transition={{ duration: 0.6 }}
+      className="fixed top-0 left-0 w-full backdrop-blur-xl bg-white/10 border-b border-white/20 shadow-xl z-50"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
-        {/* Logo */}
+
+        {/* LOGO */}
         <motion.div
-          className="text-white text-2xl font-bold cursor-pointer"
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.08 }}
+          className="text-white text-2xl font-extrabold tracking-wide"
         >
-          <Link href="/">Kunal Nimbre</Link>
+          <Link href="/">
+            <span className="bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
+              Harsh.dev
+            </span>
+          </Link>
         </motion.div>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-6 text-white font-semibold text-lg">
-          {navLinks.map((link, index) => (
-            <motion.li
-              key={index}
-              className={`relative cursor-pointer transition ${
-                pathname === link.path ? "text-red-500" : "hover:text-red-500"
-              }`}
-              whileHover={{ scale: 1.1 }}
-            >
-              <Link href={link.path}>{link.name}</Link>
+        {/* DESKTOP */}
+        <ul className="hidden md:flex space-x-8 text-white font-semibold text-lg">
+          {navLinks.map((link) => (
+            <li key={link.path} className="relative">
+              <Link
+                href={link.path}
+                className={`transition ${
+                  pathname === link.path
+                    ? "text-red-400"
+                    : "hover:text-red-400"
+                }`}
+              >
+                {link.name}
+              </Link>
+
               {pathname === link.path && (
                 <motion.div
-                  className="absolute left-0 bottom-0 w-full h-1 bg-red-500"
-                  layoutId="underline"
+                  layoutId="navUnderline"
+                  className="absolute left-0 -bottom-1 w-full h-[3px] bg-red-500 rounded-full"
                 />
               )}
-            </motion.li>
+            </li>
           ))}
         </ul>
 
-        {/* Hamburger */}
-        <div className="md:hidden">
-          <button onClick={toggleMenu} aria-label="Toggle Menu">
-            {isOpen ? <X className="text-white" /> : <Menu className="text-white" />}
-          </button>
-        </div>
+        {/* HAMBURGER */}
+        <button
+          className="md:hidden text-white"
+          onClick={toggleMenu}
+        >
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="md:hidden absolute top-full left-0 w-full bg-black text-white z-40 shadow-lg"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-black/95 backdrop-blur-xl"
           >
-            <ul className="flex flex-col gap-4 py-6 px-6 text-lg font-semibold">
-              {navLinks.map((link, index) => (
-                <motion.li
-                  key={index}
-                  className={`cursor-pointer ${
-                    pathname === link.path ? "text-red-500" : "hover:text-red-500"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  onClick={toggleMenu}
-                >
-                  <Link href={link.path}>{link.name}</Link>
-                </motion.li>
+            <ul className="flex flex-col items-center gap-6 py-8 text-xl font-semibold text-white">
+              {navLinks.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    href={link.path}
+                    className={`${
+                      pathname === link.path
+                        ? "text-red-400"
+                        : "hover:text-red-400"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
               ))}
             </ul>
           </motion.div>
@@ -94,4 +111,3 @@ export default function Navbar() {
     </motion.nav>
   );
 }
-// This code defines a responsive navigation bar using React and Framer Motion.

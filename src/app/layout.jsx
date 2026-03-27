@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Kunal Nimbre",
-  description: "portfolio of Kunal Nimbre",
+  title: "Harsh Koli",
+  description: "portfolio of Harsh Koli",
 };
 
 export default function RootLayout({ children }) {

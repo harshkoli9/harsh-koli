@@ -4,7 +4,7 @@ import React from "react";
 
 export default function HeroBanner() {
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/+919324562237", "_blank");
+    window.open("https://wa.me/+918779070352", "_blank");
   };
 
   return (
@@ -45,7 +45,7 @@ export default function HeroBanner() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1.2 }}
           >
-            I'm <span className="text-red-600">Kunal Nimbre</span>
+            I'm <span className="text-red-600"> Harsh Koli</span>
           </motion.h2>
           <motion.p
             className="text-lg sm:text-xl md:text-2xl font-semibold mt-2"
@@ -53,7 +53,7 @@ export default function HeroBanner() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1.4 }}
           >
-            Mechanical Engineer || Cricketer
+            Electronics Engineer || Frontend Developer || Operations Executive || Cricketer 
           </motion.p>
           <motion.button
             className="mt-6 px-6 py-3 bg-red-600 text-white rounded-lg font-bold hover:bg-red-700 transition"
