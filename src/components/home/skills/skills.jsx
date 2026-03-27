@@ -38,7 +38,10 @@ export default function Skills() {
   ];
 
   return (
-    <section className="bg-black py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+    <section
+      id="skills"
+      className="bg-black py-16 md:py-24 px-4 sm:px-6 lg:px-8"
+    >
 
       {/* TITLE */}
       <motion.h2
@@ -61,26 +64,29 @@ export default function Skills() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-            >  
+            >
               {category.title}
             </motion.h3>
 
             {/* GRID */}
-            <div className="
-              grid 
-              grid-cols-2 
-              sm:grid-cols-3 
-              md:grid-cols-4 
-              lg:grid-cols-5 
-              xl:grid-cols-6
-              gap-4 sm:gap-5 md:gap-6
-            ">
+            <div
+              className="
+                grid 
+                grid-cols-2 
+                sm:grid-cols-3 
+                md:grid-cols-4 
+                lg:grid-cols-5 
+                xl:grid-cols-6
+                gap-4 sm:gap-5 md:gap-6
+              "
+            >
 
               {category.skills.map((skill, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ y: -6, scale: 1.05 }}
                   className="
+                    min-h-[120px]
                     bg-white/5 
                     backdrop-blur-md 
                     border border-white/10 
@@ -89,18 +95,21 @@ export default function Skills() {
                     flex flex-col items-center justify-center 
                     text-white 
                     transition duration-300 
-                    hover:shadow-[0_0_20px_rgba(255,0,0,0.35)]
+                    hover:shadow-[0_0_25px_rgba(255,0,0,0.4)]
                   "
                 >
+                  {/* ICON */}
                   <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-2 sm:mb-3">
                     <Image
                       src={skill.img}
                       alt={skill.name}
                       fill
-                      className="object-contain"
+                      className="object-contain p-1"
+                      loading="lazy"
                     />
                   </div>
 
+                  {/* NAME */}
                   <p className="text-[11px] sm:text-xs md:text-sm font-medium text-center leading-tight">
                     {skill.name}
                   </p>
