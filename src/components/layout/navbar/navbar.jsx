@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState, useEffect } from "react";
@@ -12,41 +12,33 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "About", path: "/about" },
-    { name: "Skills", path: "/skills" }, // ✅ FIXED
+    { name: "Skills", path: "/skills" },
     { name: "Projects", path: "/projects" },
     { name: "Contact", path: "/contact" },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // auto close on route change
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
   return (
-    <motion.nav
-      initial={{ y: -60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 w-full backdrop-blur-xl bg-white/10 border-b border-white/20 shadow-xl z-50 relative"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
+    <nav className="fixed top-0 left-0 w-full bg-black/40 backdrop-blur-xl border-b border-white/10 z-50">
+
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex justify-between items-center">
 
         {/* LOGO */}
-        <motion.div
-          whileHover={{ scale: 1.08 }}
-          className="text-white text-2xl font-extrabold tracking-wide"
-        >
+        <div className="text-white text-xl sm:text-2xl font-extrabold">
           <Link href="/">
             <span className="bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
               Harsh.dev
             </span>
           </Link>
-        </motion.div>
+        </div>
 
         {/* DESKTOP MENU */}
-        <ul className="hidden md:flex space-x-8 text-white font-semibold text-lg">
+        <ul className="hidden md:flex space-x-6 lg:space-x-8 text-white font-medium text-base lg:text-lg">
           {navLinks.map((link) => (
             <li key={link.path} className="relative">
               <Link
@@ -63,64 +55,56 @@ export default function Navbar() {
               {pathname === link.path && (
                 <motion.div
                   layoutId="navUnderline"
-                  className="absolute left-0 -bottom-1 w-full h-[3px] bg-red-500 rounded-full"
+                  className="absolute left-0 -bottom-1 w-full h-[2px] bg-red-500 rounded-full"
                 />
               )}
             </li>
           ))}
         </ul>
 
-        {/* HAMBURGER BUTTON */}
+        {/* HAMBURGER */}
         <button
-          className="md:hidden text-white z-50"
+          className="md:hidden text-white"
           onClick={toggleMenu}
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
-
-      {/* OVERLAY */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/40 z-40 md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
-          />
-        )}
-      </AnimatePresence>
 
       {/* MOBILE MENU */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl z-50"
+            exit={{ opacity: 0, y: -15 }}
+            className="md:hidden fixed top-0 left-0 w-full h-screen bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 text-white text-2xl font-semibold z-50"
           >
-            <ul className="flex flex-col items-center gap-6 py-8 text-xl font-semibold text-white">
-              {navLinks.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    href={link.path}
-                    className={`${
-                      pathname === link.path
-                        ? "text-red-400"
-                        : "hover:text-red-400"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                href={link.path}
+                className={`transition ${
+                  pathname === link.path
+                    ? "text-red-400"
+                    : "hover:text-red-400"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+
+            {/* CLOSE BUTTON */}
+            <button
+              onClick={toggleMenu}
+              className="absolute top-6 right-6"
+            >
+              <X size={28} />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+
+    </nav>
   );
 }
