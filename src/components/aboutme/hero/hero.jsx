@@ -71,13 +71,14 @@ const Hero = () => {
               LinkedIn
             </a>
 
-            <a
-              href="/Harsh_koli.pdf"
-              className="px-5 py-2.5 border border-white rounded-full hover:bg-white hover:text-black transition text-sm"
-            >
-              Resume
-            </a>
-
+<a
+  href="https://drive.google.com/file/d/1R-DnIux91cueMLEhZTUiiaXGgQW1QRlB/view?usp=sharing"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="px-5 py-2.5 border border-white rounded-full hover:bg-white hover:text-black transition text-sm"
+>
+  Resume
+</a>
             <a
               href="/projects"
               className="px-5 py-2.5 border border-red-500 text-red-400 rounded-full hover:bg-red-600 hover:text-white transition text-sm"
